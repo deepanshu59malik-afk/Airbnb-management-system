@@ -3,7 +3,9 @@
 A full-stack web application that allows hosts to manage property listings and guests to explore, book, and manage stays.
 ## 📸 Homepage
 
-![Homepage](images/home.png)
+<p align="center">
+  <img src="images/home.png" width="70%" alt="Home Page">
+</p>
 ### ✨ Features
 - User Authentication
 - Property Listings
