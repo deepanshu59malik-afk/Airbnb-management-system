@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport"
+content="width=device-width, initial-scale=1.0">
+
+<title>StayFinder</title>
+
+<link rel="stylesheet" href="style.css">
+
+</head>
+
+<body>
+
+
+<!-- NAVBAR -->
+
+<div class="navbar">
+
+    <h2 class="logo">Airbnb</h2>
+
+    <div class="menu">
+
+        <a href="#">Home</a>
+
+        <a href="#feedback">Customer Feedback</a>
+
+        <a href="#">Services</a>
+
+    </div>
+
+    <div class="right">
+
+        <a href="login.html">Login</a>
+
+        <a href="register.html">Register</a>
+
+    </div>
+
+</div>
+
+
+
+
+
+
+
+<!-- HERO -->
+
+<div class="hero">
+    <h1>Find your next stay</h1>
+</div>
+
+
+
+<!-- POPULAR -->
+
+<h2 class="title">Popular stays</h2>
+
+<div class="container">
+
+    <div class="card">
+        <img src="images/delhi.jpg">
+        <h3>Luxury Room - Delhi</h3>
+        <p>⭐ 4.8 • ₹1200 / night</p>
+    </div>
+
+    <div class="card">
+        <img src="images/goa.webp">
+        <h3>Goa Beach Villa</h3>
+        <p>⭐ 4.9 • ₹4500 / night</p>
+    </div>
+
+    <div class="card">
+        <img src="images/mumbai.jpeg">
+        <h3>Mumbai Apartment</h3>
+        <p>⭐ 4.7 • ₹2200 / night</p>
+    </div>
+
+    <div class="card">
+        <img src="images/manali.jpg">
+        <h3>Manali Hill View</h3>
+        <p>⭐ 4.9 • ₹3000 / night</p>
+    </div>
+
+</div>
+
+
+
+<!-- CUSTOMER FEEDBACK -->
+
+<h2 id="feedback" class="title">Customer Feedback</h2>
+
+<div class="container">
+
+    <div class="card">
+        <img src="images/feedback.png">
+        <h3>Rahul Sharma</h3>
+        <p>⭐⭐⭐⭐⭐ Amazing stay in Goa</p>
+    </div>
+
+    <div class="card">
+        <img src="images/feedback.png">
+        <h3>Ankit Verma</h3>
+        <p>⭐⭐⭐⭐ Great service & booking</p>
+    </div>
+
+    <div class="card">
+        <img src="images/feedback.png">
+        <h3>Priya Singh</h3>
+        <p>⭐⭐⭐⭐⭐ Loved the Manali trip</p>
+    </div>
+
+</div>
+
+
+
+<!-- SERVICES -->
+
+<h2 class="title">Services</h2>
+
+<div class="container">
+
+<div class="card">
+    <img src="images/cleaning.jpg">
+    <h3>Room Cleaning</h3>
+    <a href="service_request.php?type=cleaning">
+        <button>Request</button>
+    </a>
+</div>
+
+<div class="card">
+    <img src="images/fooddelivery.webp">
+    <h3>Food Delivery</h3>
+    <a href="service_request.php?type=food">
+        <button>Request</button>
+    </a>
+</div>
+
+<div class="card">
+    <img src="images/taxiservice.jpg">
+    <h3>Taxi Service</h3>
+    <a href="service_request.php?type=taxi">
+        <button>Request</button>
+    </a>
+</div>
+<div class="card">
+    <img src="images/guideservice.jpeg">
+    <h3>Guide Service</h3>
+    <a href="service_request.php?type=guide">
+        <button>Request</button>
+    </a>
+</div>
+</div>
+<!-- CHATBOT BUTTON -->
+
+<div class="chatbot-btn" onclick="toggleChat()">
+💬
+</div>
+
+
+
+<!-- CHATBOT -->
+
+<div class="chatbot-container" id="chatbot">
+
+<div class="chat-header">
+StayFinder Assistant
+<span onclick="toggleChat()">✖</span>
+</div>
+
+
+<div class="chat-body" id="chatBody">
+
+<div class="bot-msg">
+Hi 👋 Ask something or click below
+</div>
+
+
+<div class="quick-btns">
+
+<button onclick="quickMsg('cheap')">Cheap</button>
+
+<button onclick="quickMsg('luxury')">Luxury</button>
+
+<button onclick="quickMsg('delhi')">Delhi</button>
+
+<button onclick="quickMsg('goa')">Goa</button>
+
+<button onclick="quickMsg('booked')">Booked</button>
+
+
+
+</div>
+
+</div>
+
+
+<div class="chat-input">
+
+<input type="text" id="msg">
+
+<button onclick="sendMsg()">
+Send
+</button>
+
+</div>
+
+</div>
+
+
+
+<script>
+
+function toggleChat()
+{
+let chat = document.getElementById("chatbot");
+
+if(chat.style.display == "flex")
+chat.style.display = "none";
+else
+chat.style.display = "flex";
+}
+
+
+function sendMsg()
+{
+let input = document.getElementById("msg");
+let text = input.value;
+
+if(text=="") return;
+
+let body = document.getElementById("chatBody");
+
+body.innerHTML +=
+"<div class='user-msg'>" + text + "</div>";
+
+fetch("chatbot.php", {
+
+method:"POST",
+
+headers:{
+"Content-Type":
+"application/x-www-form-urlencoded"
+},
+
+body:"msg="+encodeURIComponent(text)
+
+})
+
+.then(res=>res.text())
+
+.then(data=>{
+
+body.innerHTML +=
+"<div class='bot-msg'>" + data + "</div>";
+
+})
+
+.catch(err=>{
+
+body.innerHTML +=
+"<div class='bot-msg'>Error</div>";
+
+});
+
+input.value="";
+}
+
+
+function quickMsg(text)
+{
+document.getElementById("msg").value=text;
+sendMsg();
+}
+
+</script>
+<h2>Contact Support</h2>
+
+<form action="contact.php" method="post">
+
+<input name="name" placeholder="Name">
+
+<input name="email" placeholder="Email">
+
+<input name="message" placeholder="Message">
+
+<button>Send</button>
+
+</form>
+
+</body>
+</html>

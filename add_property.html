@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Add Property</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        body { font-family: Arial, sans-serif; background:#f7f7f7; margin:0; padding:0; }
+        .form-box {
+            background:#fff;
+            max-width:500px;
+            margin:50px auto;
+            padding:30px;
+            border-radius:15px;
+            box-shadow:0 8px 20px rgba(0,0,0,0.1);
+        }
+        .form-box h2 {
+            text-align:center;
+            color:#ff5a5f;
+            margin-bottom:20px;
+        }
+        .form-box input, 
+        .form-box textarea, 
+        .form-box button {
+            width:100%;
+            padding:12px;
+            margin:10px 0;
+            border-radius:8px;
+            border:1px solid #ccc;
+            font-size:16px;
+        }
+        .form-box textarea { resize:vertical; }
+        .form-box button {
+            background:#ff5a5f;
+            color:#fff;
+            border:none;
+            font-weight:bold;
+            cursor:pointer;
+            transition:0.3s;
+        }
+        .form-box button:hover { background:#ff785f; }
+        .form-box label { font-weight:bold; color:#333; }
+    </style>
+</head>
+<body>
+
+<div class="form-box">
+    <h2>Add New Property</h2>
+    <form action="add_property.php" method="post" enctype="multipart/form-data">
+        <label>Property Title</label>
+        <input name="title" placeholder="Title" required>
+
+        <label>Location</label>
+        <input name="location" placeholder="Location" required>
+
+        <label>Price per Night</label>
+        <input name="price" type="number" placeholder="Price" required>
+
+        <label>Guests</label>
+        <input name="guests" type="number" placeholder="Guests" required>
+
+        <label>Property Image</label>
+        <input type="file" name="image" accept="image/*">
+
+        <button type="submit">Add Property</button>
+    </form>
+</div>
+
+</body>
+</html>
